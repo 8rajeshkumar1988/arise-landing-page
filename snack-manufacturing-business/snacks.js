@@ -231,6 +231,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const leadType = '10';
 
     // Prepare form data
+    const form_type='1';
     const formDataNew = new FormData();
     formDataNew.append('name', name);
     formDataNew.append('mobile', number);
@@ -238,7 +239,7 @@ document.addEventListener('DOMContentLoaded', function () {
     formDataNew.append('any_comments', msg);
     formDataNew.append('page_url', 'https://africaforinvestors.com/snack-manufacturing-business/');
     formDataNew.append('lead_type', leadType);
-    formDataNew.append('form_type', "1");
+    formDataNew.append('form_type', form_type);
 
     // Submit using fetch to fixed URL 
     fetch('/save_lead', {  
