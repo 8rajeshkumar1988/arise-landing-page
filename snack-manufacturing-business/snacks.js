@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const number = document.getElementById('phone')?.value || '';
     const email = document.getElementById('email')?.value || '';
     const msg = document.getElementById('tellUs')?.value || '';
-    const leadType = 'Snack Landing Page';
+    const leadType = '10';
 
     // Prepare form data
     const formDataNew = new FormData();
