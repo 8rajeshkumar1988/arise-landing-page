@@ -234,7 +234,8 @@
             buttons.forEach((btn) => {
                 btn.addEventListener('click', (event) => {
                     event.preventDefault();
-
+                    btn.disabled = true;
+                    btn.innerText = 'Processing...';
                     console.log(`Button clicked: ${btn.dataset.source}`);
                     if (btn.dataset.source === 'first') {
                         var name = document.getElementById('name')?.value || '';
@@ -266,6 +267,8 @@
                             document.querySelector('.alert_second').innerText = '';
                         }, 3000);
                         }
+                        btn.disabled = false;
+                        // btn.innerText = 'Request Consultation';
                         return;
                     }
 
@@ -307,10 +310,14 @@
                             console.log('Server response:', data);
                             if (!data.error) {
                                 location.href = '/thank-you';  
+                                 btn.disabled = false;
+                                btn.innerText = 'Request Consultation';
                             }
                         })
                         .catch((err) => {
                             console.error('Error:', err);
+                             btn.disabled = false;
+                                btn.innerText = 'Request Consultation';
                         });
                 });
             });
