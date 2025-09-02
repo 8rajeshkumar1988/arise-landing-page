@@ -452,7 +452,7 @@
 
 .alert_second {
   position: absolute;
-  bottom: 5px;
+  bottom: clamp(0.3125rem, -1.2286rem + 1.8051vw, 0.9375rem);
   right: var(--paddingX);
   font-size: 14px;
   color: #fff;

@@ -510,7 +510,7 @@
 }
 
 .alert_second{
-    position: absolute; bottom:5px; right: var(--paddingX); font-size: 14px; color: #fff;
+    position: absolute; bottom: clamp(0.3125rem, -1.2286rem + 1.8051vw, 0.9375rem); right: var(--paddingX); font-size: 14px; color: #fff;
 }   
 
 @media screen and (max-width: 1536px) {
