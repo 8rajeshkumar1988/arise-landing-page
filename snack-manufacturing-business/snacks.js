@@ -236,7 +236,7 @@ document.addEventListener('DOMContentLoaded', function () {
     formDataNew.append('mobile', number);
     formDataNew.append('email', email);
     formDataNew.append('any_comments', msg);
-    formDataNew.append('page_url', 'snack_landingpage');
+    formDataNew.append('page_url', 'https://africaforinvestors.com/snack-manufacturing-business/');
     formDataNew.append('lead_type', leadType);
 
     // Submit using fetch to fixed URL 
