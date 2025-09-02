@@ -241,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Submit using fetch to fixed URL
     fetch('/save_lead', {
-      type: "POST",
+      method: "POST",
       enctype: 'multipart/form-data',
       data: formDataNew,
       dataType: "json",
