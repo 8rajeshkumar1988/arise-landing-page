@@ -240,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function () {
     formDataNew.append('lead_type', leadType);
 
     // Submit using fetch to fixed URL
-    fetch('/save_lead', { 
+    fetch('/save_lead', {  
       method: "POST",
       enctype: 'multipart/form-data',
       data: formDataNew,
