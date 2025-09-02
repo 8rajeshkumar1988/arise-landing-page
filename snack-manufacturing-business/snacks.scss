@@ -509,6 +509,10 @@
     }
 }
 
+.alert_second{
+    position: absolute; bottom:5px; right: var(--paddingX); font-size: 14px; color: #fff;
+}   
+
 @media screen and (max-width: 1536px) {
     :root {
         --paddingX: 5vw;
@@ -807,6 +811,14 @@
             width: auto;
             margin-bottom: 20px;
             filter: invert(0);
+        }
+        input{
+            height: auto;
+        }
+        .alert_second{
+            position: unset;
+            width: 100%;
+            text-align: right;
         }
     }
     #form.active {
