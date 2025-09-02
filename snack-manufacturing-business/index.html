@@ -1,17 +1,21 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AFI Snacks Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1">
+    <title>Invest in Snack Manufacturing Business in Africa | SEZs, FDI</title>
+    <meta name="description" content="Invest in Africa’s booming snack manufacturing sector. Set up business in Arise IIP SEZs with incentives, modern infrastructure, and vast consumer demand.">
+    <meta property="og:image" content="./assets/third_background.webp" />
     <link rel="stylesheet" href="./snacks.css">
 </head>
 
 <body>
     <section id="home">
 
-        <img src="./assets/homeBanner.webp" alt="homepage" class="backLayer">        
+        <img src="./assets/homeBanner.webp" alt="homepage" class="backLayer">
         <div class="layer"></div>
         <div class="content">
             <img src="./assets/afi-logo.svg" alt="logo" class="logo">
@@ -19,7 +23,8 @@
             <div class="split">
                 <div class="left">
                     <p>Unlock Your Gateway to a <br>
-<span>$2$1 Trillion</span> Food Economy with:</p>
+                        <span>$2$1 Trillion</span> Food Economy with:
+                    </p>
                     <div class="tiles">
                         <div>
                             <img src="./assets/export.svg" alt="Export-Ready Infrastructure">
@@ -59,9 +64,10 @@
                             </div>
                         </div>
                         <div class="sec">
-                            <button id="first_cta" class="cta">Request Consultation</button>
+                            <button data-source="first" id="first_cta" class="cta">Request Consultation</button>
                         </div>
                     </div>
+                    <p class="alert" style="color: red; margin-top: 0px; text-align: right; font-size: 14px;"></p>
                 </div>
             </div>
         </div>
@@ -69,9 +75,10 @@
 
     <section id="second">
         <div class="left">
-            <h2>Africa's Edge in 
-Manufacturing</h2>
-            <p>With a rising market volume, expanding consumer base, availability of skilled workforce and ease of business incentives - Africa's snack food industry is not just growing, it's evolving!</p>
+            <h2>Africa's Edge in
+                Manufacturing</h2>
+            <p>With a rising market volume, expanding consumer base, availability of skilled workforce and ease of
+                business incentives - Africa's snack food industry is not just growing, it's evolving!</p>
         </div>
         <div class="right">
             <div class="chips">
@@ -89,7 +96,7 @@ Manufacturing</h2>
             </div>
             <div class="leftpop pop">
                 <p class="pop1">
-                    1.3Bn <br>Consumers 
+                    1.3Bn <br>Consumers
                 </p>
             </div>
             <div class="leftpop pop">
@@ -120,7 +127,10 @@ Manufacturing</h2>
             </div>
             <div>
                 <img src="./assets/whiteLogo.png" alt="logo">
-                <p>Arise IIP designs, finances, builds and operates integrated, tailor-made, and sustainable industrial zones across Africa. We work together with government & investors to foster the development of industrial ecosystems and facilitate the shift from a commodity supplier to a global manufacturing powerhouse.</p>
+                <p>Arise IIP designs, finances, builds and operates integrated, tailor-made, and sustainable industrial
+                    zones across Africa. We work together with government & investors to foster the development of
+                    industrial ecosystems and facilitate the shift from a commodity supplier to a global manufacturing
+                    powerhouse.</p>
             </div>
         </div>
     </section>
@@ -168,7 +178,8 @@ Manufacturing</h2>
             <img src="./assets/afi-logo.svg" alt="afi logo">
             <div>
                 <p>Our Presence across</p>
-                <div>India | China | Vietnam | UAE | GABON | TOGO | BENIN | COTE D'IVOIRE | NIGERIA | CONGO | REPUBLIC OF
+                <div>India | China | Vietnam | UAE | GABON | TOGO | BENIN | COTE D'IVOIRE | NIGERIA | CONGO | REPUBLIC
+                    OF
                     CONGO | RWANDA | TANZANIA | KENYA | MALAWI</div>
             </div>
         </div>
@@ -176,18 +187,19 @@ Manufacturing</h2>
             <p>Copyright@2025 Arise IIP Pvt. Ltd. All rights reserved.</p>
         </div>
     </section>
-    
+
     <section id="form">
         <img src="./assets/close.png" alt="close" class="close">
         <img src="./assets/afi-logo.svg" alt="logo" class="logo">
         <h2>Setup Your Snack Business Today</h2>
         <label for="name_" hidden>Name</label>
-        <input type="text" name="name" id="name_" placeholder="Name" >
+        <input type="text" name="name" id="name_" placeholder="Name">
         <label for="number_" hidden>number</label>
         <input type="text" id="number_" name="number" placeholder="Number">
         <label for="email_" hidden>enter your email</label>
         <input type="email" name="email" id="email_" placeholder="Email">
-        <button class="cta">Request Consultation</button>
+        <button class="cta form_cta" data-source="second">Request Consultation</button>
+        <div class="alert_second" style="position: absolute; bottom: 15px; right: 5vw; font-size: 14px; color: red;"></div>
     </section>
 
     <div class="fixedBtn">
@@ -195,7 +207,7 @@ Manufacturing</h2>
             <img src="./assets/arrow.png" alt="">
         </div>
         <div class="ctaDiv">
-            <button class="cta">Request Consultation</button>
+            <button class="cta" data-source="second">Request Consultation</button>
         </div>
     </div>
 
@@ -203,6 +215,113 @@ Manufacturing</h2>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
     <script src="./snacks.js"></script>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const buttons = document.querySelectorAll('.form_cta, #first_cta');
+            if (!buttons.length) {
+                console.error('No buttons found with selectors .form_cta or #first_cta');
+                return;
+            }
+
+            // Helper: read CSRF token from cookie set by Django’s CsrfViewMiddleware
+            function getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return decodeURIComponent(parts.pop().split(';').shift());
+            }
+            const csrftoken = getCookie('csrftoken');
+
+            buttons.forEach((btn) => {
+                btn.addEventListener('click', (event) => {
+                    event.preventDefault();
+
+                    console.log(`Button clicked: ${btn.dataset.source}`);
+                    if (btn.dataset.source === 'first') {
+                        var name = document.getElementById('name')?.value || '';
+                        var number = document.getElementById('phone')?.value || '';
+                        var email = document.getElementById('email')?.value || '';
+                        var msg = document.getElementById('tellUs')?.value || '';
+                        var subscribe = document.getElementById('comsent');
+                        var subscribeVal = subscribe && subscribe.checked ? '1' : '0';
+                        var tandc = document.getElementById('terms');
+                        var tandcVal = tandc && tandc.checked ? '1' : '0';
+                    } else if (btn.dataset.source === 'second') {
+                        var name = document.getElementById('name_')?.value || '';
+                        var number = document.getElementById('number_')?.value || '';
+                        var email = document.getElementById('email_')?.value || '';
+                        var msg = 'none';
+                        var subscribeVal =  '0';
+                        var tandcVal = '1';
+                    }
+
+                    if (name === '' || number === '' || email === '' || msg === '' || tandcVal === '0') {
+                        if(btn.dataset.source === 'first'){
+                            document.querySelector('.alert').innerText = 'Please fill all the fields';
+                             setTimeout(() => {
+                            document.querySelector('.alert').innerText = '';
+                        }, 3000);
+                        }else if(btn.dataset.source === 'second'){
+                            document.querySelector('.alert_second').innerText = 'Please fill all the fields';
+                             setTimeout(() => {
+                            document.querySelector('.alert_second').innerText = '';
+                        }, 3000);
+                        }
+                        return;
+                    }
+
+                    const formData = new FormData();
+                    formData.append('name', name);
+                    formData.append('mobile', number);
+                    formData.append('email', email);
+                    formData.append('any_comments', msg);
+                    formData.append('page_url', 'https://africaforinvestors.com/snack-manufacturing-business/');
+
+                    // hidden fields
+                    formData.append('country_name', 'India');
+                    formData.append('country', '91');
+                    formData.append('form_type', '1');
+                    formData.append('investment_specialist', '');
+                    formData.append('lead_type', '4');
+                    formData.append('region', '');
+                    formData.append('city', '');
+                    formData.append('loc', '');
+                    formData.append('postal', '');
+                    formData.append('opportunity', '');
+                    formData.append('sector', '');
+                    formData.append('subscribe', subscribeVal);
+                    formData.append('accept_tnc', tandcVal);
+
+                    fetch('/save_lead', {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-CSRFToken': csrftoken,
+                        },
+                        credentials: 'same-origin',
+                    })
+                        .then((res) => {
+                            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                            return res.json();
+                        })
+                        .then((data) => {
+                            console.log('Server response:', data);
+                            if (!data.error) {
+                                location.href = '/thank-you';  
+                            }
+                        })
+                        .catch((err) => {
+                            console.error('Error:', err);
+                        });
+                });
+            });
+        });
+
+
+
+    </script>
+
 </body>
 
 </html>
