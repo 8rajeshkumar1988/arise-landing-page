@@ -5,9 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1">
     <title>Invest in Snack Manufacturing Business in Africa | SEZs, FDI</title>
-    <meta name="description" content="Invest in Africa’s booming snack manufacturing sector. Set up business in Arise IIP SEZs with incentives, modern infrastructure, and vast consumer demand.">
+    <meta name="description"
+        content="Invest in Africa’s booming snack manufacturing sector. Set up business in Arise IIP SEZs with incentives, modern infrastructure, and vast consumer demand.">
     <meta property="og:image" content="./assets/third_background.webp" />
     <link rel="stylesheet" href="./snacks.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/css/intlTelInput.css">
+
 </head>
 
 <body>
@@ -26,15 +29,15 @@
                     <div class="tiles">
                         <div>
                             <img src="./assets/export.svg" alt="Export-Ready Infrastructure">
-                            <p>Export-Ready <br>Infrastructure</p>
+                            <p>Export Ready <br>Infrastructure</p>
                         </div>
                         <div>
-                            <img src="./assets/fda.svg" alt="FDA Compliant">
-                            <p>FDA <br>Compliant</p>
+                            <img src="./assets/fda.svg" alt="FDA Compliance">
+                            <p>FDA <br>Compliance</p>
                         </div>
                         <div>
                             <img src="./assets/single.svg" alt="Single-Window Clearance">
-                            <p>Single-Window <br>Clearance</p>
+                            <p>Single Window <br>Clearance</p>
                         </div>
                     </div>
                 </div>
@@ -46,7 +49,8 @@
                         <label for="email">Enter your email</label>
                         <input type="email" id="email" placeholder="Email">
                         <label for="phone">Enter your phone</label>
-                        <input type="tel" id="phone" placeholder="Phone Number">
+                        <input data-lenis-prevent type="tel" class="phone_tel" id="phone" placeholder="Phone Number" maxlength="17" minlength="7"
+                            style="padding-left: 50px;">
                         <label for="tellUs">describe your business</label>
                         <textarea name="message" placeholder="Message" id="tellUs"></textarea>
                     </div>
@@ -192,12 +196,14 @@
         <h2>Setup Your Snack Business Today</h2>
         <label for="name_" hidden>Name</label>
         <input type="text" name="name" id="name_" placeholder="Name">
-        <label for="number_" hidden>number</label>
-        <input type="text" id="number_" name="number" placeholder="Number">
+        <label for="number_" hidden>Phone Number</label>
+        <input type="text" data-lenis-prevent class="phone_tel" id="number_" name="number" placeholder="Phone Number" maxlength="17" minlength="7"
+            style="padding-left: 50px;">
         <label for="email_" hidden>enter your email</label>
         <input type="email" name="email" id="email_" placeholder="Email">
         <button class="cta form_cta" data-source="second">Request Consultation</button>
-        <div class="alert_second" style="position: absolute; bottom: 15px; right: 5vw; font-size: 14px; color: red;"></div>
+        <div class="alert_second" style="position: absolute; bottom: 15px; right: 5vw; font-size: 14px; color: red;">
+        </div>
     </section>
 
     <div class="fixedBtn">
@@ -208,22 +214,96 @@
             <button class="cta" data-source="second">Request Consultation</button>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
 
     <script src="https://unpkg.com/lenis@1.0.45/dist/lenis.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+
     <script src="./snacks.js"></script>
 
 
     <script>
+let lenis;
+
+// init Lenis once
+function initLenis() {
+  lenis = new Lenis();
+
+  // keep ScrollTrigger in sync
+  lenis.on("scroll", ScrollTrigger.update);
+
+  // drive Lenis with GSAP ticker
+  gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+  });
+  gsap.ticker.lagSmoothing(0);
+
+  window.lenis = lenis; // keep reference global
+}
+
+   function pauseLenis() {
+  if (window.lenis) {
+    window.lenis.destroy();
+    window.lenis = null;
+  }
+}
+
+// re-init helper
+function resumeLenis() {
+  if (!window.lenis) {
+    initLenis();
+  }
+}
+initLenis();
+
+
         document.addEventListener('DOMContentLoaded', () => {
+            const phoneInputIdBySource = {
+                first: 'phone',
+                second: 'number_',
+            };
+
+            function geoIpLookup(success, failure) {
+                fetch('https://ipinfo.io/json')
+                    .then(r => r.json())
+                    .then(resp => success((resp && resp.country) ? resp.country : 'us'))
+                    .catch(failure);
+            }
+
+            if (typeof window.intlTelInput !== 'function') {
+                console.error('intlTelInput not loaded. Include the vanilla build BEFORE this script.');
+                return;
+            }
+
+            const itiInstances = {}; // { [inputId]: iti }
+            document.querySelectorAll('.phone_tel').forEach((input) => {
+                if (!input.id) {
+                    console.warn('A .phone_tel input has no id; skipping:', input);
+                    return;
+                }
+                const iti = window.intlTelInput(input, {
+                    initialCountry: 'auto',
+                    geoIpLookup,
+                });
+                itiInstances[input.id] = iti;
+
+                input.addEventListener('open:countrydropdown', pauseLenis);
+                // 🔺 resume when it closes (also resumes on selection because it closes)
+                input.addEventListener('close:countrydropdown', resumeLenis);
+
+            });
+
+
             const buttons = document.querySelectorAll('.form_cta, #first_cta');
             if (!buttons.length) {
                 console.error('No buttons found with selectors .form_cta or #first_cta');
                 return;
             }
 
-            // Helper: read CSRF token from cookie set by Django’s CsrfViewMiddleware
             function getCookie(name) {
                 const value = `; ${document.cookie}`;
                 const parts = value.split(`; ${name}=`);
@@ -237,7 +317,15 @@
                     btn.disabled = true;
                     btn.innerText = 'Processing...';
                     console.log(`Button clicked: ${btn.dataset.source}`);
+                    // const phoneInputId = phoneInputIdBySource[source];
+                    const source = btn.dataset.source;
+                    const phoneInputId = phoneInputIdBySource[source];
+                    const iti = phoneInputId ? itiInstances[phoneInputId] : undefined;
+                    const countryData = iti.getSelectedCountryData();
+                    const fullNumber = iti.getNumber();
+
                     if (btn.dataset.source === 'first') {
+
                         var name = document.getElementById('name')?.value || '';
                         var number = document.getElementById('phone')?.value || '';
                         var email = document.getElementById('email')?.value || '';
@@ -246,31 +334,33 @@
                         var subscribeVal = subscribe && subscribe.checked ? '1' : '0';
                         var tandc = document.getElementById('terms');
                         var tandcVal = tandc && tandc.checked ? '1' : '0';
+
                     } else if (btn.dataset.source === 'second') {
                         var name = document.getElementById('name_')?.value || '';
                         var number = document.getElementById('number_')?.value || '';
                         var email = document.getElementById('email_')?.value || '';
                         var msg = 'none';
-                        var subscribeVal =  '0';
+                        var subscribeVal = '0';
                         var tandcVal = '1';
                     }
 
                     if (name === '' || number === '' || email === '' || msg === '' || tandcVal === '0') {
-                        if(btn.dataset.source === 'first'){
+                        if (btn.dataset.source === 'first') {
                             document.querySelector('.alert').innerText = 'Please fill all the fields';
-                             setTimeout(() => {
-                            document.querySelector('.alert').innerText = '';
-                        }, 3000);
-                        }else if(btn.dataset.source === 'second'){
+                            setTimeout(() => {
+                                document.querySelector('.alert').innerText = '';
+                            }, 3000);
+                        } else if (btn.dataset.source === 'second') {
                             document.querySelector('.alert_second').innerText = 'Please fill all the fields';
-                             setTimeout(() => {
-                            document.querySelector('.alert_second').innerText = '';
-                        }, 3000);
+                            setTimeout(() => {
+                                document.querySelector('.alert_second').innerText = '';
+                            }, 3000);
                         }
                         btn.disabled = false;
                         // btn.innerText = 'Request Consultation';
                         return;
                     }
+                    console.log(name, number, email, msg, subscribeVal, tandcVal, countryData.name, countryData.dialCode);
 
                     const formData = new FormData();
                     formData.append('name', name);
@@ -280,8 +370,8 @@
                     formData.append('page_url', 'https://africaforinvestors.com/snack-manufacturing-business/');
 
                     // hidden fields
-                    formData.append('country_name', 'India');
-                    formData.append('country', '91');
+                    // formData.append('country_name', 'India');
+                    // formData.append('country', '91');
                     formData.append('form_type', '1');
                     formData.append('investment_specialist', '');
                     formData.append('lead_type', '4');
@@ -293,6 +383,8 @@
                     formData.append('sector', '');
                     formData.append('subscribe', subscribeVal);
                     formData.append('accept_tnc', tandcVal);
+                    formData.append('country_name', countryData.name);
+                    formData.append('country', countryData.dialCode);
 
                     fetch('/save_lead', {
                         method: 'POST',
@@ -309,15 +401,15 @@
                         .then((data) => {
                             console.log('Server response:', data);
                             if (!data.error) {
-                                location.href = '/thank-you';  
-                                 btn.disabled = false;
+                                btn.disabled = false;
                                 btn.innerText = 'Request Consultation';
+                                location.href = '/thank-you';
                             }
                         })
                         .catch((err) => {
                             console.error('Error:', err);
-                             btn.disabled = false;
-                                btn.innerText = 'Request Consultation';
+                            btn.disabled = false;
+                            btn.innerText = 'Request Consultation';
                         });
                 });
             });

@@ -151,6 +151,7 @@
 }
 #home .content .split .form .field #phone {
   grid-area: 3/1/4/2;
+  width: 100%;
 }
 #home .content .split .form .field #tellUs {
   grid-area: 1/2/4/3;
@@ -442,6 +443,8 @@
   border: 1px solid var(--Border-Default-Default, rgba(217, 217, 217, 0.4431372549));
   resize: none;
   overflow: auto;
+  width: 100%;
+  height: 100%;
 }
 #form button {
   border-radius: 35px;
