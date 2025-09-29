@@ -286,6 +286,20 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(param) || '';
     }
+
+    // helper to set cookie
+    function setCookie(name, value, days) {
+        const d = new Date();
+        d.setTime(d.getTime() + (days*24*60*60*1000));
+        document.cookie = name + "=" + encodeURIComponent(value) + ";expires=" + d.toUTCString() + ";path=/";
+    }
+
+    // helper to get cookie
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return decodeURIComponent(parts.pop().split(';').shift());
+    }
  
         document.addEventListener('DOMContentLoaded', () => {
             const phoneInputIdBySource = {
@@ -415,9 +429,18 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
                     formData.append('country', countryData.dialCode);
 
                      // ✅ Add UTM params
-                    formData.append('utm_source', getUTMParam('utm_source'));
-                    formData.append('utm_medium', getUTMParam('utm_medium'));
-                    formData.append('utm_campaign', getUTMParam('utm_campaign'));
+                    const utmSource = getUTMParam('utm_source');
+                    const utmMedium = getUTMParam('utm_medium');
+                    const utmCampaign = getUTMParam('utm_campaign');
+
+                    if (utmSource) setCookie('utm_source', utmSource, 30);
+                    if (utmMedium) setCookie('utm_medium', utmMedium, 30);
+                    if (utmCampaign) setCookie('utm_campaign', utmCampaign, 30);
+
+
+                    formData.append('utm_source',utmSource);
+                    formData.append('utm_medium', utmMedium);
+                    formData.append('utm_campaign', utmCampaign);
 
                     fetch('/save_lead', {
                         method: 'POST',
