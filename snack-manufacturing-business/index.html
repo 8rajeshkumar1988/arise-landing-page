@@ -281,8 +281,12 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
             }
         }
         initLenis();
-
-
+        
+    function getUTMParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param) || '';
+    }
+ 
         document.addEventListener('DOMContentLoaded', () => {
             const phoneInputIdBySource = {
                 first: 'phone',
@@ -389,7 +393,9 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
                     formData.append('mobile', number);
                     formData.append('email', email);
                     formData.append('any_comments', msg);
-                    formData.append('page_url', 'https://africaforinvestors.com/snack-manufacturing-business/');
+                    //formData.append('page_url', 'https://africaforinvestors.com/snack-manufacturing-business/');
+                    formData.append('page_url', window.location.href);
+
 
                     // hidden fields
                     // formData.append('country_name', 'India');
@@ -407,6 +413,11 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
                     formData.append('accept_tnc', tandcVal);
                     formData.append('country_name', countryData.name);
                     formData.append('country', countryData.dialCode);
+
+                     // ✅ Add UTM params
+                    formData.append('utm_source', getUTMParam('utm_source'));
+                    formData.append('utm_medium', getUTMParam('utm_medium'));
+                    formData.append('utm_campaign', getUTMParam('utm_campaign'));
 
                     fetch('/save_lead', {
                         method: 'POST',
