@@ -421,12 +421,15 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
                     formData.append('city', '');
                     formData.append('loc', '');
                     formData.append('postal', '');
-                    formData.append('opportunity_id', '');
-                    formData.append('sector_id', '');
+                    formData.append('opportunity', '');
+                    formData.append('sector', '');
                     formData.append('subscribe', subscribeVal);
                     formData.append('accept_tnc', tandcVal);
                     formData.append('country_name', countryData.name);
                     formData.append('country', countryData.dialCode);
+
+                    formData.append('Interest_In_Sector', 'Food Products');
+                    formData.append('Description_Of_Interest', 'Snack');
 
                      // ✅ Add UTM params
                     const utmSource = getUTMParam('utm_source');
