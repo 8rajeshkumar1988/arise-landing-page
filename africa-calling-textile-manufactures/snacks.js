@@ -70,11 +70,13 @@ document.addEventListener("DOMContentLoaded", function () {
       x: "-50%",
       ease: "power4.out",
       duration: 1,
+      scale: .8,
       opacity: 0,
     })
     .from(
       "#second .arrow",
-      { y: "100px", x: "-100px", ease: "power4.out", duration: 1, opacity: 0 },
+      { y: "100px", x: "-100px", ease: "power4.out",
+        scale: .8, duration: 1, opacity: 0 },
       "<0.1"
     );
 
@@ -133,6 +135,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let pairs = [
     [".pop1", ".pop3"],
     [".pop2", ".pop4"],
+    [".pop5", ".pop6"],
   ];
 
   let tl1 = gsap.timeline({ repeat: -1 });

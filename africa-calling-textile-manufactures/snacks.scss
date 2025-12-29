@@ -9,9 +9,9 @@
 }
 
 :root {
-    --font-70: clamp(3.125rem, -0.2404rem + 3.8462vw, 4.375rem);
-    --font-34: clamp(1.5rem, -0.1827rem + 1.9231vw, 2.125rem);
-    --font-24: clamp(1rem, -0.3462rem + 1.5385vw, 1.5rem);
+    --font-70: clamp(2.875rem, 0.7175rem + 2.5271vw, 3.75rem);
+    --font-34: clamp(1.25rem, 0.8214rem + 0.6696vw, 1.625rem);
+    --font-24: clamp(1rem, 0.3836rem + 0.722vw, 1.25rem);
     --paddingY: clamp(3.125rem, -8.6538rem + 13.4615vw, 7.5rem);
     --paddingX: 10vw;
     --green: #ace63c;
@@ -100,10 +100,10 @@
                         display: flex;
                         align-items: center;
                         gap: 20px;
-                        margin-top: 30px;
+                        margin-top: clamp(1.25rem, -0.2911rem + 1.8051vw, 1.875rem);
                         img {
-                            width: clamp(3.4375rem, -0.7692rem + 4.8077vw, 5rem);
-                            height: clamp(2.5rem, -0.8654rem + 3.8462vw, 3.75rem);
+                            width: 30px;
+                            height: 30px;
                             object-fit: contain;
                         }
                         p {
@@ -235,16 +235,18 @@
             .arrow {
                 position: absolute;
                 top: 0;
-                right: 0;
+                right: 5%;
                 height: 55%;
+                scale: .8;
             }
         }
         .projected {
             position: absolute;
             background-color: #f3f3f3;
-            padding: 30px;
+            padding: 30px 60px;
             border-radius: 25px;
-            top: 25%;
+            top: 40%;
+            transform: scale(.8);
             p {
                 font-weight: 600;
                 color: #00a94f;
@@ -760,6 +762,18 @@
 @media screen and (max-width: 768px) {
     :root {
         --font-70: 35px;
+    }
+    #new_added .content > p{
+        text-align: center;
+    }
+    #new_added .content > div{
+        align-items: flex-start;
+        & > div{
+            flex-direction: column-reverse;
+        }
+    }
+    #new_added{
+        max-height: none;
     }
     #footer {
         padding-bottom: calc(var(--paddingY) + 50px);
