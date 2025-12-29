@@ -770,6 +770,7 @@
         align-items: flex-start;
         & > div{
             flex-direction: column-reverse;
+            min-width: 100px;
         }
     }
     #new_added{
@@ -850,11 +851,11 @@
             }
             .leftpop {
                 left: 0;
-                bottom: 0;
+                bottom: -3%;
             }
             .rightpop {
                 right: 0;
-                bottom: 0;
+                bottom: -3%;
             }
             .chips {
                 .arrow {

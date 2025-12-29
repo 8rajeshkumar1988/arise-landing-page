@@ -660,6 +660,7 @@
   }
   #new_added .content > div > div {
     flex-direction: column-reverse;
+    min-width: 100px;
   }
   #new_added {
     max-height: none;
@@ -714,11 +715,11 @@
   }
   #second .right .leftpop {
     left: 0;
-    bottom: 0;
+    bottom: -3%;
   }
   #second .right .rightpop {
     right: 0;
-    bottom: 0;
+    bottom: -3%;
   }
   #second .right .chips .arrow {
     height: 45%;
