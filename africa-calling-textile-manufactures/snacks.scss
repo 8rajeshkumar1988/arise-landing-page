@@ -646,7 +646,7 @@
         height: auto;
         .content{
             & > div{
-                gap: clamp(5rem, -9.5455rem + 22.7273vw, 7.5rem);
+                gap: clamp(4rem, -9.5455rem + 22.7273vw, 7.5rem);
                 & > div{
                     img{
                         height:clamp(3.4375rem, -2.017rem + 8.5227vw, 4.375rem);
@@ -762,6 +762,9 @@
 @media screen and (max-width: 768px) {
     :root {
         --font-70: 35px;
+    }
+    #new_added .content{
+        padding: var(--paddingY) var(--paddingX);
     }
     #new_added .content > p{
         text-align: center;
