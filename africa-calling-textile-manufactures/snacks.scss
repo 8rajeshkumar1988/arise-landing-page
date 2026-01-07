@@ -280,7 +280,7 @@ input[type=checkbox]:checked::after {
             .arrow {
                 position: absolute;
                 bottom: 0;
-                right: -180px;
+                right: -200px;
                 height: 55%;
                 // scale: .5;
                 transform: rotate(10deg) scale(.5);
@@ -654,7 +654,7 @@ input[type=checkbox]:checked::after {
             }
             .chips {
                 .arrow {
-                    right: -140px;
+                    right: -160px;
                 }
             }
             .leftpop {
