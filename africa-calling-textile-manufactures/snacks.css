@@ -278,7 +278,7 @@ input[type=checkbox]:checked::after {
 #second .right .chips .arrow {
   position: absolute;
   bottom: 0;
-  right: -200px;
+  right: -180px;
   height: 55%;
   transform: rotate(10deg) scale(0.5);
   z-index: 0;
