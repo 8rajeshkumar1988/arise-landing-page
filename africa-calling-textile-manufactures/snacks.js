@@ -75,8 +75,8 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     .from(
       "#second .arrow",
-      { y: "100px", x: "-100px", ease: "power4.out",
-        scale: .8, duration: 1, opacity: 0 },
+      { y: "100px", x: "-100px", ease: "power4.out", transform: "rotate(10deg)",
+        scale: .5, duration: 1, opacity: 0 },
       "<0.1"
     );
 

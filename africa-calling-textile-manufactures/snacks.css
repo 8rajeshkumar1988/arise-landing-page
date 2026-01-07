@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 * {
   margin: 0;
@@ -28,6 +29,45 @@
   font-size: clamp(1rem, 0.3269rem + 0.7692vw, 1.25rem);
   white-space: pre;
   cursor: pointer;
+}
+
+input[type=checkbox] {
+  cursor: pointer;
+  all: unset;
+  position: relative;
+  height: 15px;
+  width: 15px;
+  flex-shrink: 0;
+}
+
+input[type=checkbox]:checked::before {
+  content: "✓";
+  position: absolute;
+  height: 25px;
+  width: 25px;
+  z-index: 1;
+  top: 0px;
+  left: 19%;
+  font-weight: 1000;
+  font-size: 14px;
+}
+
+input[type=checkbox]::after {
+  content: "";
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  height: 15px;
+  width: 15px;
+  top: 1px;
+  border-radius: 5px;
+  border: 1px solid #b8b8b8;
+}
+
+input[type=checkbox]:checked::after {
+  content: "";
+  background-color: #a2c617;
+  border: 1px solid #a2c617;
 }
 
 #home {
@@ -185,6 +225,12 @@
   font-size: clamp(0.8125rem, 0.3077rem + 0.5769vw, 1rem);
   font-weight: 400;
 }
+#home .content .split .form .tandc .fir > div label a {
+  all: unset;
+  cursor: pointer;
+  color: #000000;
+  text-decoration: underline;
+}
 #home .content .split .form .tandc input {
   width: clamp(0.9375rem, 0.4327rem + 0.5769vw, 1.125rem);
   height: clamp(0.9375rem, 0.4327rem + 0.5769vw, 1.125rem);
@@ -192,6 +238,7 @@
 
 #second {
   background-color: #fff;
+  position: relative;
   height: 100vh;
   padding: calc(var(--paddingY) / 2) var(--paddingX);
   display: grid;
@@ -230,18 +277,23 @@
 }
 #second .right .chips .arrow {
   position: absolute;
-  top: 0;
-  right: 5%;
+  bottom: 0;
+  right: -200px;
   height: 55%;
-  scale: 0.8;
+  transform: rotate(10deg) scale(0.5);
+  z-index: 0;
 }
 #second .right .projected {
   position: absolute;
   background-color: #f3f3f3;
   padding: 30px 60px;
   border-radius: 25px;
-  top: 40%;
+  top: 5%;
+  width: -moz-max-content;
+  width: max-content;
+  right: clamp(25rem, -5.8213rem + 36.1011vw, 37.5rem);
   transform: scale(0.8);
+  z-index: 2;
 }
 #second .right .projected p {
   font-weight: 600;
@@ -537,15 +589,30 @@
     right: -2.5vw;
   }
   #second .right .chips .arrow {
-    right: 5%;
+    right: -140px;
   }
   #second .right .leftpop {
     left: 10%;
   }
 }
+.image_right {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  padding: 40px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  inset: 0;
+}
+
 @media screen and (max-width: 1200px) {
   :root {
     --font-70: clamp(2.5rem, 0.6287rem + 2.924vw, 3.125rem);
+  }
+  #second .right .projected {
+    right: 280px;
   }
   #home {
     height: auto;
@@ -652,6 +719,9 @@
   :root {
     --font-70: 35px;
   }
+  .image_right {
+    padding: 0;
+  }
   #new_added .content {
     padding: var(--paddingY) var(--paddingX);
   }
@@ -703,7 +773,7 @@
     gap: 50px;
   }
   #second .right .projected {
-    left: 50%;
+    left: 25%;
     transform: translateX(-50%);
   }
   #second .right .projected p {
