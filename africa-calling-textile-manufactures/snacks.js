@@ -176,6 +176,7 @@ document.addEventListener("DOMContentLoaded", function () {
   );
 
   // Parallax effect for image_right
+  if(window.innerWidth > 768){
   gsap.to(".image_right", {
     y: "30%",
     ease: "none",
@@ -184,8 +185,9 @@ document.addEventListener("DOMContentLoaded", function () {
       start: "top bottom",
       end: "bottom top",
       scrub: true,
-    },
-  });
+      },
+    });
+  }
 
   document.querySelector(".fixedBtn").addEventListener("click", function () {
     document.querySelector("#form").classList.add("active");
