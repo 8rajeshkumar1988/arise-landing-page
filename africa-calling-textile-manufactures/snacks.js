@@ -56,16 +56,16 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   });
 
-  tl.from("#second .imgg9", { y: "15%", ease: "power4.out", duration: 1 }, "0") // ninth
-    .from("#second .imgg8", { y: "25%", ease: "power4.out", duration: 1 }, "0") // eighth
-    .from("#second .imgg7", { y: "35%", ease: "power4.out", duration: 1 }, "0") // seventh
-    .from("#second .imgg6", { y: "50%", ease: "power4.out", duration: 1 }, "0") // sixth
-    .from("#second .imgg5", { y: "15%", ease: "power4.out", duration: 1 }, "0") // fifth
-    .from("#second .imgg4", { y: "25%", ease: "power4.out", duration: 1 }, "0") // forth
-    .from("#second .imgg3", { y: "35%", ease: "power4.out", duration: 1 }, "0") // third
-    .from("#second .imgg2", { y: "50%", ease: "power4.out", duration: 1 }, "0") // second
-    .from("#second .imgg1", { y: "70%", ease: "power4.out", duration: 1 }, "0") //top most
-    .from("#second .projected", {
+  // tl.from("#second .imgg9", { y: "15%", ease: "power4.out", duration: 1 }, "0") // ninth
+    // .from("#second .imgg8", { y: "25%", ease: "power4.out", duration: 1 }, "0") // eighth
+    // .from("#second .imgg7", { y: "35%", ease: "power4.out", duration: 1 }, "0") // seventh
+    // .from("#second .imgg6", { y: "50%", ease: "power4.out", duration: 1 }, "0") // sixth
+    // .from("#second .imgg5", { y: "15%", ease: "power4.out", duration: 1 }, "0") // fifth
+    // .from("#second .imgg4", { y: "25%", ease: "power4.out", duration: 1 }, "0") // forth
+    // .from("#second .imgg3", { y: "35%", ease: "power4.out", duration: 1 }, "0") // third
+    // .from("#second .imgg2", { y: "50%", ease: "power4.out", duration: 1 }, "0") // second
+    // .from("#second .imgg1", { y: "70%", ease: "power4.out", duration: 1 }, "0") //top most
+    tl.from("#second .projected", {
       y: "100px",
       x: "-50%",
       ease: "power4.out",
@@ -174,6 +174,18 @@ document.addEventListener("DOMContentLoaded", function () {
       },
     }
   );
+
+  // Parallax effect for image_right
+  gsap.to(".image_right", {
+    y: "30%",
+    ease: "none",
+    scrollTrigger: {
+      trigger: "#second",
+      start: "top bottom",
+      end: "bottom top",
+      scrub: true,
+    },
+  });
 
   document.querySelector(".fixedBtn").addEventListener("click", function () {
     document.querySelector("#form").classList.add("active");
