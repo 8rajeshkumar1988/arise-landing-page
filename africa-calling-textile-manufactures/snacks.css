@@ -504,22 +504,25 @@ input[type=checkbox]:checked::after {
   padding-bottom: calc(var(--paddingY) + 100px);
 }
 #footer .foot {
-  height: clamp(5rem, -1.1643rem + 7.2202vw, 7.5rem);
   display: grid;
   grid-template-columns: auto auto auto;
   color: #fff;
   font-weight: 400;
   font-size: clamp(0.875rem, -0.3579rem + 1.444vw, 1.375rem);
   gap: 80px;
+  align-items: end;
 }
 #footer .foot img {
-  height: clamp(5rem, -1.1643rem + 7.2202vw, 7.5rem);
+  height: clamp(3.75rem, -5.1786rem + 9.5238vw, 6.25rem);
 }
 #footer .foot > div {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   text-transform: uppercase;
+}
+#footer .foot .presence_across {
+  margin-bottom: 10px;
 }
 #footer .foot p {
   color: #fff;
@@ -714,6 +717,10 @@ input[type=checkbox]:checked::after {
 }
 .fixedBtn {
   display: none;
+}
+
+.afi_logo {
+  justify-content: center !important;
 }
 
 @media screen and (max-width: 768px) {
